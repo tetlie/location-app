@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
-  width: 96%;
-  max-width: 720px;
+const Container = styled.div`
+  width: 100%;
+  height: 90vh;
   margin-left: auto;
   margin-right: auto;
-  
-  display: flex;
-  flex-direction: column;
-  padding-top: 80px;
-`
+  overflow-x: scroll;
+  grid-area: info;
+`;
+
+export default Container;

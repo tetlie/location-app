@@ -1,12 +1,13 @@
 import React from 'react'
 import GlobalStyle from './components/GlobalStyle'
-import HomeContainer from   './containers/HomeContainer'
+import MapContainer from './containers/MainContainer';
+
 
 function App() {
   return (
     <>
     <GlobalStyle />
-    <HomeContainer />
+    <MapContainer />
     </>
   )
 };
