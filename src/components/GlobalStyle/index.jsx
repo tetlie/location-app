@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
 
   html {
     font-size: 20px;
-    line-height:  1.5;
+    line-height:  1.4;
   }
 
   body {

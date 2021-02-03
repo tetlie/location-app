@@ -3,11 +3,10 @@ import styled from 'styled-components';
 
 
 
-export const LocationLinkBase = styled.button`
-  width: 30%;
-  display: block;
-  padding: 1em;
-  margin: 1em;
+export const LocationLinkBase = styled.a`
+  min-width: 10%;
+  padding: 0.5em 0.5em;
+  margin: 0.5em;
   border: 2px solid black;
   border-radius: 0.5rem;
   color: black;
@@ -19,19 +18,13 @@ export const LocationLinkBase = styled.button`
 
 export const PostLinkTitle = styled.span`
   display: block;
-  font-size: 1rem;
-  font-weight: 700;
+  font-size: 0.8rem;
 `;
 
-export const PostLinkDate = styled.span`
-  display: block;
-  font-size: 0.9rem;
-  color: #333333;
-`;
 
-function LocationButton({ title }) {
+function LocationButton({ title, url }) {
   return (
-      <LocationLinkBase>
+      <LocationLinkBase href={url}>
         <PostLinkTitle>{title}</PostLinkTitle>
       </LocationLinkBase>
   );

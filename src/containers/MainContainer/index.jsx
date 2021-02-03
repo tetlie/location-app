@@ -4,11 +4,15 @@ import Cosmic from 'cosmicjs'
 
 import styled from 'styled-components'
 
-import Container from '../../components/Containers'
-import PageTitle from '../../components/TextComponents'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom';
+
 import LocationButton from '../../components/LocationButton'
-
-
+import HomeContainer from '../HomeContainer';
+import LocationContainer from '../LocationContainer';
 
 export const Main = styled.main`
     width: 100vw;
@@ -30,7 +34,7 @@ export const MapStyle = styled.div`
 
 export const LocationLinkContainer = styled.div`
   grid-area: locations;
-  background-color: black;
+  background-color: white;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -38,17 +42,16 @@ export const LocationLinkContainer = styled.div`
   justify-content: center;
   margin: 0;
   bottom: 0;
-  align-self: flex-end;
-  height: 10vh;
-`
+  height: 5vh;
+`;
 
 let map = null;
 
-function MapContainer() {
+function MainContainer() {
 
-  const [pageData, setPageData] = useState(null);
+  const [locationsData, setLocationsData] = useState(null);
 
-  useEffect(() => {
+  useEffect(() => { // for locations
     const client = new Cosmic();
     const bucket = client.bucket({
       slug: process.env.BUCKET_SLUG,
@@ -57,11 +60,10 @@ function MapContainer() {
 
     bucket.getObjects({
       type: 'locations',
-      limit: 5,
-      props: 'title,slug,content, metadata',
+      props: 'title,slug,content,metadata',
     })
     .then(data => {
-      setPageData(data)
+      setLocationsData(data)
       console.log(data)
     })
     .catch(error => {
@@ -70,11 +72,11 @@ function MapContainer() {
 
   }, []);
 
-  Mapbox.accessToken = 'pk.eyJ1IjoidGV0bGllIiwiYSI6ImNrazZrb2Z4bDAzcHQydm8ycTViNjc0NWgifQ.aCFviWYyJgEyIFlBXFExvw';
+  Mapbox.accessToken = process.env.MAPBOX_API_KEY;
   const mapElement = useRef(null);
 
-  useEffect(() => {
-    if(pageData !== null){ // sjekk om data er lastet
+  useEffect(() => { // for map
+    if(locationsData !== null){ // sjekk om data er lastet
       map = new Mapbox.Map({
         container: mapElement.current,
         style: 'mapbox://styles/mapbox/streets-v11',
@@ -82,7 +84,7 @@ function MapContainer() {
         center: [10.7522, 59.9139],
       })
 
-      pageData.objects.map(item => {
+      locationsData.objects.map(item => {
         const lon = item.metadata.longitude
         const lat = item.metadata.latitude
         const newMarker = new Mapbox.Marker()
@@ -90,11 +92,8 @@ function MapContainer() {
         newMarker.addTo(map)
       })
     }
-  }, [pageData]);
+  }, [locationsData]);
 
-  function handleClick(event) {
-    console.log('hello')
-  }
 
   function renderSkeleton() {
     return (
@@ -105,18 +104,21 @@ function MapContainer() {
   function renderPage() {
     return (
     <Main>
-      <Container>
-          <PageTitle>Zones of Conflict</PageTitle>
-      </Container>
+      <Router>
+        <Switch>
+          <Route path="/:slug" component={LocationContainer} />
+          <Route path="/" component={HomeContainer} exact />
+        </Switch>
+      </Router>
       <MapStyle ref={mapElement} />
-      <LocationLinkContainer>
-          {pageData.objects.map(item => {
+        <LocationLinkContainer>
+           {locationsData.objects.map(item => {
               return (
                 <LocationButton
-                  onClick={() => console.log('hello')} type='submit'
                   title={item.title}
                   longitude={item.metadata.longitude}
                   longitude={item.metadata.latitude}
+                  url={`${item.slug}`} 
                   key={item.slug}
                 />
               )
@@ -128,9 +130,9 @@ function MapContainer() {
 
   return (
     <>
-      {(pageData === null) ? renderSkeleton() : renderPage()}
+      {(locationsData === null) ? renderSkeleton() : renderPage()}
     </>
   )
 };
 
-export default MapContainer;
+export default MainContainer;

@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
-const PageTitle = styled.h1`
-  font-size: 3rem;
+const MainTitle = styled.h1`
+  font-size: 4rem;
   font-weight: 700;
-  text-align: center;
+  text-align: left;
 
   @media screen and (max-width: 768px) {
     font-size: 40px;
@@ -14,4 +14,4 @@ const PageTitle = styled.h1`
   }
 `;
 
-export default PageTitle;
+export default MainTitle;

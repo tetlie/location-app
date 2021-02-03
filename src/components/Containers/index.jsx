@@ -7,6 +7,7 @@ const Container = styled.div`
   margin-right: auto;
   overflow-x: scroll;
   grid-area: info;
+  padding: 2em;
 `;
 
 export default Container;
