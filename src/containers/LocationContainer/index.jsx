@@ -44,7 +44,8 @@ function LocationContainer({ match }) {
     return (
     <main>
       <Container as="main">
-          <MainTitle>{pageData.title}</MainTitle>
+        {pageData.metadata.country && <h2>{pageData.metadata.country}</h2>}
+        <MainTitle>{pageData.title}</MainTitle>
           <Paragraph dangerouslySetInnerHTML={{__html: pageData.content}}></Paragraph>
       </Container>
     </main>

@@ -39,10 +39,11 @@ export const LocationLinkContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   margin: 0;
   bottom: 0;
-  height: 5vh;
+  overflow-x: scroll;
+  overflow-y: hidden;
 `;
 
 let map = null;
@@ -90,9 +91,24 @@ function MainContainer() {
         const newMarker = new Mapbox.Marker()
         newMarker.setLngLat([lon, lat])
         newMarker.addTo(map)
+        newMarker.getElement().addEventListener('click', event => {
+          window.location.href = `/${item.slug}`;
+        });
       })
+
     }
   }, [locationsData]);
+
+
+  function handleHoverPosition(){
+    map.flyTo({
+      center: [
+        -77.0364,
+        38.8951
+      ]
+    })
+  }
+
 
 
   function renderSkeleton() {

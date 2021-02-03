@@ -5,9 +5,11 @@ const Container = styled.div`
   height: 90vh;
   margin-left: auto;
   margin-right: auto;
-  overflow-x: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   grid-area: info;
   padding: 2em;
+  
 `;
 
 export default Container;

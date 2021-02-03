@@ -4,6 +4,7 @@ const MainTitle = styled.h1`
   font-size: 4rem;
   font-weight: 700;
   text-align: left;
+  line-height: 1;
 
   @media screen and (max-width: 768px) {
     font-size: 40px;
