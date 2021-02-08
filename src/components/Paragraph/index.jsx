@@ -13,6 +13,7 @@ const Paragraph = styled.p`
   @media screen and (max-width: 480px) {
     font-size: 0.75rem;
   }
+
 `
 
 export default Paragraph;

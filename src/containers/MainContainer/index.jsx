@@ -169,19 +169,23 @@ function MainContainer() {
       </Router>
       <MapStyle ref={mapElement} />
       <LocationLinkContainer>
-           {locationsData.objects.map(item => {
-              return (
-                <LocationButton
-                  title={item.title}
-                  long={item.metadata.longitude}
-                  lat={item.metadata.latitude}
-                  url={`${item.slug}`} 
-                  key={item.slug}
-                  handleHoverPosition={handleHoverPosition}
-                  handleClickPosition={handleClickPosition}
-                />
-              )
-            })}
+        <LocationButton
+          title={'←'}
+          url={`/`} 
+        />
+          {locationsData.objects.map(item => {
+            return (
+              <LocationButton
+                title={item.title}
+                long={item.metadata.longitude}
+                lat={item.metadata.latitude}
+                url={`${item.slug}`} 
+                key={item.slug}
+                handleHoverPosition={handleHoverPosition}
+                handleClickPosition={handleClickPosition}
+              />
+            )
+          })}
         </LocationLinkContainer>
     </Main>
     )

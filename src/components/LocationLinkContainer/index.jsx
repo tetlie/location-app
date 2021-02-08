@@ -2,7 +2,8 @@ import styled from 'styled-components'
 
 const LocationLinkContainer = styled.div`
   grid-area: locations;
-  background-color: white;
+  background: #ddd;
+  height: 10vh;
   width: 100%;
   display: flex;
   flex-direction: row;

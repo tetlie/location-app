@@ -4,22 +4,34 @@ import styled from 'styled-components';
 
 
 export const LocationLinkBase = styled.a`
-  min-width: 100px;
-  padding: 0.5em 0.5em;
+  padding: 0.5em;
   margin: 0.5em;
+  background-color: black;
   border: 2px solid black;
-  border-radius: 0.5rem;
-  color: black;
+  border-radius: 3em;
+  color: #ddd;
   text-decoration: none;
   text-align: center;
   &:hover {
-    border: 2px solid red;
+    background-color: #f2f2f2;
+    color: black;
+    border: 2px solid black;
+  }
+  &:active {
+    background-color: #f2f2f2;
+    color: black;
+    border: 2px solid black;
   }
 `;
 
 export const PostLinkTitle = styled.span`
   display: block;
   font-size: 0.8rem;
+  white-space: nowrap;
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.75rem;
+  }
 `;
 
 
