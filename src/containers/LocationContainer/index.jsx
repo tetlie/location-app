@@ -1,9 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import Cosmic from 'cosmicjs';
 
+import styled from 'styled-components'
+
 import Container from '../../components/Containers'
 import MainTitle from '../../components/MainTitle'
 import Paragraph from '../../components/Paragraph'
+
+
+export const HLine = styled.hr`
+  border: 1px solid black;
+`
+
+
+export const LeadParagraph = styled.p`
+  margin-top: 24px;
+  color: #000;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: left;
+
+  @media screen and (max-width: 768px) {
+    font-size: 1.2rem;
+  }
+
+  @media screen and (max-width: 480px) {
+    font-size: 1rem;
+  }
+`
+
+export const CountryTitle = styled.h2`
+    font-weight: 400;
+`
+
 
 
 
@@ -44,9 +73,13 @@ function LocationContainer({ match }) {
     return (
     <main>
       <Container as="main">
-        {pageData.metadata.country && <h2>{pageData.metadata.country}</h2>}
+        {pageData.metadata.country && <CountryTitle>{pageData.metadata.country}</CountryTitle>}
+        <HLine />
         <MainTitle>{pageData.title}</MainTitle>
-          <Paragraph dangerouslySetInnerHTML={{__html: pageData.content}}></Paragraph>
+        <HLine />
+        {pageData.metadata.lead_paragraph && <LeadParagraph>{pageData.metadata.lead_paragraph}</LeadParagraph>}
+        <HLine />
+        <Paragraph dangerouslySetInnerHTML={{__html: pageData.content}}></Paragraph>
       </Container>
     </main>
     )

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Mapbox, { Marker } from 'mapbox-gl';
+import Mapbox from 'mapbox-gl';
 import Cosmic from 'cosmicjs'
 
 import styled from 'styled-components'
@@ -13,6 +13,8 @@ import {
 import LocationButton from '../../components/LocationButton'
 import HomeContainer from '../HomeContainer';
 import LocationContainer from '../LocationContainer';
+import LocationLinkContainer from '../../components/LocationLinkContainer';
+import SkeletonContainer from '../SkeletonContainer';
 
 export const Main = styled.main`
     width: 100vw;
@@ -25,32 +27,64 @@ export const Main = styled.main`
     grid-template-areas: 
     "info map"
     "locations locations";
+
+    @media screen and (max-width: 768px) {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      grid-template-areas: 
+      "locations"
+      "map"
+      "info";
+    }
 `;
 
 export const MapStyle = styled.div`
   height: 90vh;
   grid-area: map;
+
+  @media screen and (max-width: 768px) {
+    height: 40vh;
+  }
 `;
 
-export const LocationLinkContainer = styled.div`
-  grid-area: locations;
-  background-color: white;
-  width: 100%;
+export const MapSkeletonOuter = styled.div`
+  background-color: #f2f2f2;
+  height: 90vh;
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
-  margin: 0;
-  bottom: 0;
-  overflow-x: scroll;
-  overflow-y: hidden;
+  justify-content: center;
+  grid-area: map;
+
+  @media screen and (max-width: 768px) {
+    height: 40vh;
+  }
 `;
+
+export const MapSkeletonInner = styled.div`
+  background: #ddd;
+  margin: 10px 0;
+  border-radius: 4px;
+  width: 90%;
+  height: 90%;
+  margin: 15px;
+`
+
 
 let map = null;
 
 function MainContainer() {
 
   const [locationsData, setLocationsData] = useState(null);
+  const [mapCenter, setMapCenter] = useState([10.7522, 59.9139]);
+
+  useEffect(() => {
+    const data = localStorage.getItem("map-center");
+    data && setMapCenter(JSON.parse(data));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("map-center", JSON.stringify(mapCenter));
+  }, [mapCenter]);
 
   useEffect(() => { // for locations
     const client = new Cosmic();
@@ -81,8 +115,8 @@ function MainContainer() {
       map = new Mapbox.Map({
         container: mapElement.current,
         style: 'mapbox://styles/mapbox/streets-v11',
-        zoom: 1,
-        center: [10.7522, 59.9139],
+        zoom: 5,
+        center: mapCenter,
       })
 
       locationsData.objects.map(item => {
@@ -90,30 +124,37 @@ function MainContainer() {
         const lat = item.metadata.latitude
         const newMarker = new Mapbox.Marker()
         newMarker.setLngLat([lon, lat])
-        newMarker.addTo(map)
         newMarker.getElement().addEventListener('click', event => {
-          window.location.href = `/${item.slug}`;
+          window.location.href = `/${item.slug}`; // location fra cosmic
+          handleClickPosition(lon, lat)
         });
+        newMarker.addTo(map)
       })
 
     }
   }, [locationsData]);
 
 
-  function handleHoverPosition(){
+  function handleHoverPosition(long, lat){
     map.flyTo({
       center: [
-        -77.0364,
-        38.8951
-      ]
+        long,
+        lat
+      ],
+      zoom: 5
     })
-  }
+  };
 
-
+  function handleClickPosition(long, lat) {
+    setMapCenter([long, lat]);
+    console.log(mapCenter);
+  };
 
   function renderSkeleton() {
     return (
-      <p>Laster data...</p>
+      <Main>
+        <MapSkeletonOuter><MapSkeletonInner /></MapSkeletonOuter>
+      </Main>
     );
   };
 
@@ -127,22 +168,24 @@ function MainContainer() {
         </Switch>
       </Router>
       <MapStyle ref={mapElement} />
-        <LocationLinkContainer>
+      <LocationLinkContainer>
            {locationsData.objects.map(item => {
               return (
                 <LocationButton
                   title={item.title}
-                  longitude={item.metadata.longitude}
-                  longitude={item.metadata.latitude}
+                  long={item.metadata.longitude}
+                  lat={item.metadata.latitude}
                   url={`${item.slug}`} 
                   key={item.slug}
+                  handleHoverPosition={handleHoverPosition}
+                  handleClickPosition={handleClickPosition}
                 />
               )
             })}
         </LocationLinkContainer>
     </Main>
     )
-  }
+  };
 
   return (
     <>

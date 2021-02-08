@@ -13,7 +13,7 @@ export const LocationLinkBase = styled.a`
   text-decoration: none;
   text-align: center;
   &:hover {
-    border: 2px solid blue;
+    border: 2px solid red;
   }
 `;
 
@@ -23,9 +23,15 @@ export const PostLinkTitle = styled.span`
 `;
 
 
-function LocationButton({ title, url }) {
+
+function LocationButton({ title, url, handleHoverPosition, handleClickPosition, long, lat }) {
+
+
   return (
-      <LocationLinkBase href={url} onMouseOver={console.log('clicked')}
+      <LocationLinkBase
+        href={url}
+        onMouseEnter={() => handleHoverPosition(long, lat)}
+        onClick={() => handleClickPosition(long, lat)}
       >
         <PostLinkTitle>{title}</PostLinkTitle>
       </LocationLinkBase>

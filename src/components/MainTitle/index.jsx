@@ -7,11 +7,11 @@ const MainTitle = styled.h1`
   line-height: 1;
 
   @media screen and (max-width: 768px) {
-    font-size: 40px;
+    font-size: 3rem;
   }
 
   @media screen and (max-width: 480px) {
-    font-size: 32px;
+    font-size: 2.5rem;
   }
 `;
 
