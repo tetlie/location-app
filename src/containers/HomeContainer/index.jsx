@@ -4,6 +4,8 @@ import Cosmic from 'cosmicjs';
 import Container from '../../components/Containers'
 import MainTitle from '../../components/MainTitle'
 import Paragraph from '../../components/Paragraph'
+import DataVisualisation from '../../components/DataVisualisation';
+
 import styled from 'styled-components'
 
 export const SkeletonText = styled.div`
@@ -111,8 +113,10 @@ function HomeContainer() {
     return (
     <main>
       <Container as="main">
+        
           <MainTitle>{pageData.title}</MainTitle>
           <Paragraph dangerouslySetInnerHTML={{__html: pageData.content}}></Paragraph>
+          {/* <DataVisualisation /> */}
       </Container>
     </main>
     )

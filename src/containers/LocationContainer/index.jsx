@@ -112,24 +112,23 @@ function LocationContainer({ match }) {
   function renderSkeleton() {
     return (
       <Container style={{backgroundColor: '#f2f2f2'}}>
-      <SkeletonTitle />
-      <br />
-      <SkeletonLead />
-      <SkeletonLead />
-      <SkeletonLead />
-      <br />
-      <SkeletonText />
-      <SkeletonText />
-      <SkeletonText />
-      <SkeletonText />
-      <SkeletonText />
-      <SkeletonText />
-      <SkeletonText />
-      <SkeletonText />
-      <SkeletonText />
-      <SkeletonText />
-
-    </Container>
+        <SkeletonTitle />
+        <br />
+        <SkeletonLead />
+        <SkeletonLead />
+        <SkeletonLead />
+        <br />
+        <SkeletonText />
+        <SkeletonText />
+        <SkeletonText />
+        <SkeletonText />
+        <SkeletonText />
+        <SkeletonText />
+        <SkeletonText />
+        <SkeletonText />
+        <SkeletonText />
+        <SkeletonText />
+      </Container>
     );
   }
 

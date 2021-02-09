@@ -14,7 +14,6 @@ import LocationButton from '../../components/LocationButton'
 import HomeContainer from '../HomeContainer';
 import LocationContainer from '../LocationContainer';
 import LocationLinkContainer from '../../components/LocationLinkContainer';
-import SkeletonContainer from '../SkeletonContainer';
 
 export const Main = styled.main`
     width: 100vw;
@@ -68,7 +67,6 @@ export const MapSkeletonInner = styled.div`
   height: 90%;
   margin: 15px;
 `
-
 
 let map = null;
 
@@ -124,16 +122,16 @@ function MainContainer() {
         const lat = item.metadata.latitude
         const newMarker = new Mapbox.Marker()
         newMarker.setLngLat([lon, lat])
-        newMarker.getElement().addEventListener('click', event => {
+        // legg til eventlytter på markers i kartet
+        newMarker.getElement().addEventListener('click', event => { 
           window.location.href = `/${item.slug}`; // location fra cosmic
-          handleClickPosition(lon, lat)
+          handleClickPosition(lon, lat);
         });
         newMarker.addTo(map)
       })
 
     }
   }, [locationsData]);
-
 
   function handleHoverPosition(long, lat){
     map.flyTo({
@@ -153,7 +151,9 @@ function MainContainer() {
   function renderSkeleton() {
     return (
       <Main>
-        <MapSkeletonOuter><MapSkeletonInner /></MapSkeletonOuter>
+        <MapSkeletonOuter>
+          <MapSkeletonInner />
+        </MapSkeletonOuter>
       </Main>
     );
   };
@@ -161,13 +161,16 @@ function MainContainer() {
   function renderPage() {
     return (
     <Main>
+
       <Router>
         <Switch>
           <Route path="/:slug" component={LocationContainer} />
           <Route path="/" component={HomeContainer} exact />
         </Switch>
       </Router>
+
       <MapStyle ref={mapElement} />
+
       <LocationLinkContainer>
         <LocationButton
           title={'←'}
@@ -183,10 +186,11 @@ function MainContainer() {
                 key={item.slug}
                 handleHoverPosition={handleHoverPosition}
                 handleClickPosition={handleClickPosition}
-              />
+              /> 
             )
           })}
         </LocationLinkContainer>
+
     </Main>
     )
   };

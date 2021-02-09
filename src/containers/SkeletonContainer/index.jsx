@@ -25,7 +25,6 @@ export const Main = styled.main`
     }
 `;
 
-
 export const LocationLinkSkeleton = styled.div`
   grid-area: locations;
   background-color: #ddd;
@@ -167,14 +166,14 @@ function SkeletonContainer() {
         <SkeletonText />
         <SkeletonText />
         <SkeletonText />
-
       </Container>
-      <MapSkeletonOuter><MapSkeletonInner /></MapSkeletonOuter>
+      <MapSkeletonOuter>
+        <MapSkeletonInner />
+      </MapSkeletonOuter>
       <LocationLinkSkeleton>
-      {[1,2,3,4,5,6,7,8,9,10].map(number => <LocationLinkItemSkeleton key={number}/>)}
-      <ShimmerWrapper><Shimmer></Shimmer></ShimmerWrapper>
+        {[1,2,3,4,5,6,7,8,9,10].map(number => <LocationLinkItemSkeleton key={number}/>)}
+        <ShimmerWrapper><Shimmer></Shimmer></ShimmerWrapper>
       </LocationLinkSkeleton>
-
     </Main>
   )
 };

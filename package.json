@@ -37,8 +37,10 @@
     "@babel/runtime": "^7.12.5",
     "cosmicjs": "^3.4.0",
     "mapbox-gl": "^2.0.1",
+    "plotly.js": "^1.58.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-plotly.js": "^2.5.1",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.2.1"
   }
