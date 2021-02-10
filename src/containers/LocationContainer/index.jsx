@@ -3,84 +3,19 @@ import Cosmic from 'cosmicjs';
 
 import styled from 'styled-components'
 
-import Container from '../../components/Containers'
-import MainTitle from '../../components/MainTitle'
-import Paragraph from '../../components/Paragraph'
+import Container from '../../components/Container'
 
+import MainTitle from '../../components/Typography/MainTitle'
+import CountryTitle from '../../components/Typography/CountryTitle'
+import LeadParagraph from '../../components/Typography/LeadParagraph'
+import Paragraph from '../../components/Typography/Paragraph'
+
+import SkeletonText from '../../components/Skeleton/SkeletonText'
+import SkeletonLead from '../../components/Skeleton/SkeletonLead'
+import SkeletonTitle from '../../components/Skeleton/SkeletonTitle'
 
 export const HLine = styled.hr`
   border: 1px solid black;
-`
-
-
-export const LeadParagraph = styled.p`
-  margin-top: 24px;
-  color: #000;
-  font-size: 1.2rem;
-  font-weight: 700;
-  text-align: left;
-
-  @media screen and (max-width: 768px) {
-    font-size: 1.2rem;
-  }
-
-  @media screen and (max-width: 480px) {
-    font-size: 1rem;
-  }
-`
-
-export const CountryTitle = styled.h2`
-    font-weight: 400;
-`
-
-export const SkeletonText = styled.div`
-  background: #ddd;
-  margin: 10px 0;
-  border-radius: 4px;
-  width: 90%;
-  height: 1rem;
-  margin: 15px;
-
-  @media screen and (max-width: 768px) {
-    height: 1rem;
-  }
-
-  @media screen and (max-width: 480px) {
-    height: 0.75rem;
-  }
-`
-export const SkeletonLead = styled.div`
-  background: #ddd;
-  margin: 10px 0;
-  border-radius: 4px;
-  width: 90%;
-  height: 1.2rem;
-  margin: 15px;
-
-  @media screen and (max-width: 768px) {
-    font-size: 1.2rem;
-  }
-
-  @media screen and (max-width: 480px) {
-    font-size: 1rem;
-  }
-`
-
-export const SkeletonTitle = styled.div`
-  background: #ddd;
-  margin: 10px 0;
-  border-radius: 4px;
-  width: 50%;
-  height: 4rem;
-  margin: 15px;
-
-  @media screen and (max-width: 768px) {
-    height: 3rem;
-  }
-
-  @media screen and (max-width: 480px) {
-    height: 2.5rem;
-  }
 `
 
 function LocationContainer({ match }) {
@@ -101,7 +36,6 @@ function LocationContainer({ match }) {
 
     .then(data => {
       setPageData(data.object)
-      console.log(data)
     })
     .catch(error => {
       console.log(error)
@@ -114,20 +48,9 @@ function LocationContainer({ match }) {
       <Container style={{backgroundColor: '#f2f2f2'}}>
         <SkeletonTitle />
         <br />
-        <SkeletonLead />
-        <SkeletonLead />
-        <SkeletonLead />
+        {[1,2,3].map(number => <SkeletonLead key={number}/>)}
         <br />
-        <SkeletonText />
-        <SkeletonText />
-        <SkeletonText />
-        <SkeletonText />
-        <SkeletonText />
-        <SkeletonText />
-        <SkeletonText />
-        <SkeletonText />
-        <SkeletonText />
-        <SkeletonText />
+        {[1,2,3,4,5,6,7,8,9,10].map(number => <SkeletonText key={number}/>)}
       </Container>
     );
   }

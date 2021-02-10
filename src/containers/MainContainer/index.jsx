@@ -97,7 +97,6 @@ function MainContainer() {
     })
     .then(data => {
       setLocationsData(data)
-      console.log(data)
     })
     .catch(error => {
       console.log(error)
@@ -176,21 +175,20 @@ function MainContainer() {
           title={'←'}
           url={`/`} 
         />
-          {locationsData.objects.map(item => {
-            return (
-              <LocationButton
-                title={item.title}
-                long={item.metadata.longitude}
-                lat={item.metadata.latitude}
-                url={`${item.slug}`} 
-                key={item.slug}
-                handleHoverPosition={handleHoverPosition}
-                handleClickPosition={handleClickPosition}
-              /> 
-            )
-          })}
-        </LocationLinkContainer>
-
+        {locationsData.objects.map(item => {
+          return (
+            <LocationButton
+              title={item.title}
+              long={item.metadata.longitude}
+              lat={item.metadata.latitude}
+              url={`${item.slug}`} 
+              key={item.slug}
+              handleHoverPosition={handleHoverPosition}
+              handleClickPosition={handleClickPosition}
+            /> 
+          )
+        })}
+      </LocationLinkContainer>
     </Main>
     )
   };

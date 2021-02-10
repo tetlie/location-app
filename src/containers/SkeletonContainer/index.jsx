@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components'
 
-import Container from '../../components/Containers'
+import Container from '../../components/Container'
 
 export const Main = styled.main`
     width: 100vw;
