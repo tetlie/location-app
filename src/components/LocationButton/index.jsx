@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
-
 export const LocationLinkBase = styled.a`
   padding: 0.5em;
   margin: 0.5em;
@@ -24,7 +22,7 @@ export const LocationLinkBase = styled.a`
   }
 `;
 
-export const PostLinkTitle = styled.span`
+export const LinkTitle = styled.span`
   display: block;
   font-size: 0.8rem;
   white-space: nowrap;
@@ -34,18 +32,27 @@ export const PostLinkTitle = styled.span`
   }
 `;
 
-
-
-function LocationButton({ title, url, handleHoverPosition, handleClickPosition, long, lat }) {
-
-
+function LocationButton({
+  title, 
+  url, 
+  handleHoverPosition, 
+  handleClickPosition, 
+  long, 
+  lat,
+  location
+}) {
+ 
   return (
       <LocationLinkBase
         href={url}
-        onMouseEnter={() => handleHoverPosition(long, lat)}
-        onClick={() => handleClickPosition(long, lat)}
+        onMouseEnter={() => 
+          (location === true) && handleHoverPosition(long, lat)
+        }
+        onClick={() => 
+          (location === true) && handleClickPosition(long, lat)
+        }
       >
-        <PostLinkTitle>{title}</PostLinkTitle>
+        <LinkTitle>{title}</LinkTitle>
       </LocationLinkBase>
   );
 }

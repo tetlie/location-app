@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Mapbox from 'mapbox-gl';
 import Cosmic from 'cosmicjs'
-
 import styled from 'styled-components'
 
 import {
@@ -10,10 +9,18 @@ import {
   Route
 } from 'react-router-dom';
 
-import LocationButton from '../../components/LocationButton'
 import HomeContainer from '../HomeContainer';
 import LocationContainer from '../LocationContainer';
+
+import LocationButton from '../../components/LocationButton'
 import LocationLinkContainer from '../../components/LocationLinkContainer';
+
+import SkeletonMapOuter from '../../components/Skeleton/SkeletonMapOuter'
+import SkeletonMapInner from '../../components/Skeleton/SkeletonMapInner'
+import SkeletonLocationLink from '../../components/Skeleton/SkeletonLocationLink'
+import SkeletonLocationLinkItem from '../../components/Skeleton/SkeletonLocationLinkItem'
+import SkeletonShimmerWrapper from '../../components/Skeleton/SkeletonLocationLinkItem'
+import SkeletonShimmer from '../../components/Skeleton/SkeletonLocationLinkItem'
 
 export const Main = styled.main`
     width: 100vw;
@@ -45,28 +52,6 @@ export const MapStyle = styled.div`
     height: 40vh;
   }
 `;
-
-export const MapSkeletonOuter = styled.div`
-  background-color: #f2f2f2;
-  height: 90vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  grid-area: map;
-
-  @media screen and (max-width: 768px) {
-    height: 40vh;
-  }
-`;
-
-export const MapSkeletonInner = styled.div`
-  background: #ddd;
-  margin: 10px 0;
-  border-radius: 4px;
-  width: 90%;
-  height: 90%;
-  margin: 15px;
-`
 
 let map = null;
 
@@ -107,8 +92,8 @@ function MainContainer() {
   Mapbox.accessToken = process.env.MAPBOX_API_KEY;
   const mapElement = useRef(null);
 
-  useEffect(() => { // for map
-    if(locationsData !== null){ // sjekk om data er lastet
+  useEffect(() => {
+    if(locationsData !== null){
       map = new Mapbox.Map({
         container: mapElement.current,
         style: 'mapbox://styles/mapbox/streets-v11',
@@ -121,9 +106,8 @@ function MainContainer() {
         const lat = item.metadata.latitude
         const newMarker = new Mapbox.Marker()
         newMarker.setLngLat([lon, lat])
-        // legg til eventlytter på markers i kartet
         newMarker.getElement().addEventListener('click', event => { 
-          window.location.href = `/${item.slug}`; // location fra cosmic
+          window.location.href = `/${item.slug}`; // lenke fra cosmic slug
           handleClickPosition(lon, lat);
         });
         newMarker.addTo(map)
@@ -150,9 +134,13 @@ function MainContainer() {
   function renderSkeleton() {
     return (
       <Main>
-        <MapSkeletonOuter>
-          <MapSkeletonInner />
-        </MapSkeletonOuter>
+        <SkeletonMapOuter>
+          <SkeletonMapInner />
+        </SkeletonMapOuter>
+        <SkeletonLocationLink>
+          {[1,2,3,4,5,6,7,8,9,10].map(number => <SkeletonLocationLinkItem key={number}/>)}
+          <SkeletonShimmerWrapper><SkeletonShimmer/></SkeletonShimmerWrapper>
+        </SkeletonLocationLink>
       </Main>
     );
   };
@@ -174,10 +162,12 @@ function MainContainer() {
         <LocationButton
           title={'←'}
           url={`/`} 
+          location={false}
         />
         {locationsData.objects.map(item => {
           return (
             <LocationButton
+              location={true}
               title={item.title}
               long={item.metadata.longitude}
               lat={item.metadata.latitude}

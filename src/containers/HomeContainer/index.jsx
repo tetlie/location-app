@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Cosmic from 'cosmicjs';
+import styled from 'styled-components'
 
 import Container from '../../components/Container'
 import MainTitle from '../../components/Typography/MainTitle'
 import Paragraph from '../../components/Typography/Paragraph'
+import LeadParagraph from '../../components/Typography/LeadParagraph'
 
 import DataVisualisation from '../../components/DataVisualisation';
 
@@ -11,7 +13,9 @@ import SkeletonText from '../../components/Skeleton/SkeletonText'
 import SkeletonLead from '../../components/Skeleton/SkeletonLead'
 import SkeletonTitle from '../../components/Skeleton/SkeletonTitle'
 
-
+export const HLine = styled.hr`
+  border: 1px solid black;
+`
 
 function HomeContainer() {
 
@@ -53,13 +57,16 @@ function HomeContainer() {
   
   function renderPage() {
     return (
-    <main>
-      <Container as="main">
-          <MainTitle>{pageData.title}</MainTitle>
-          <Paragraph dangerouslySetInnerHTML={{__html: pageData.content}}></Paragraph>
-          <DataVisualisation />
-      </Container>
-    </main>
+
+    <Container as="main">
+      <MainTitle>{pageData.title}</MainTitle>
+      <HLine />
+      {pageData.metadata.lead_paragraph && <LeadParagraph>{pageData.metadata.lead_paragraph}</LeadParagraph>}
+      <HLine />
+      <Paragraph dangerouslySetInnerHTML={{__html: pageData.content}}/>
+      <HLine />
+      <DataVisualisation />
+    </Container>
     )
   }
 

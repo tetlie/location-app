@@ -58,7 +58,6 @@ function LocationContainer({ match }) {
   
   function renderPage() {
     return (
-    <main>
       <Container as="main">
         {pageData.metadata.country && <CountryTitle>{pageData.metadata.country}<HLine /></CountryTitle>}
         <MainTitle>{pageData.title}</MainTitle>
@@ -67,7 +66,6 @@ function LocationContainer({ match }) {
         <HLine />
         <Paragraph dangerouslySetInnerHTML={{__html: pageData.content}}></Paragraph>
       </Container>
-    </main>
     )
   }
 

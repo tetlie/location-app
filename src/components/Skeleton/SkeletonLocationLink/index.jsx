@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-const LocationLinkContainer = styled.div`
+const SkeletonLocationLink = styled.div`
   grid-area: locations;
-  background: #ddd;
-  height: 10vh;
+  background-color: #ddd;
   width: 100%;
+  height: 10vh;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -16,5 +16,4 @@ const LocationLinkContainer = styled.div`
   z-index: 100;
 `;
 
-export default LocationLinkContainer;
-
+export default SkeletonLocationLink;
