@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const SkeletonMapInner = styled.div`
   background: #ddd;
@@ -7,6 +7,6 @@ const SkeletonMapInner = styled.div`
   width: 90%;
   height: 90%;
   margin: 15px;
-`
+`;
 
 export default SkeletonMapInner;

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const SkeletonLead = styled.div`
   background: #ddd;
@@ -15,6 +15,6 @@ export const SkeletonLead = styled.div`
   @media screen and (max-width: 480px) {
     font-size: 1rem;
   }
-`
+`;
 
 export default SkeletonLead;

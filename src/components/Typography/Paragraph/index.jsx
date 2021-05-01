@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Paragraph = styled.p`
   margin-top: 24px;
@@ -13,7 +13,6 @@ const Paragraph = styled.p`
   @media screen and (max-width: 480px) {
     font-size: 0.75rem;
   }
-
-`
+`;
 
 export default Paragraph;

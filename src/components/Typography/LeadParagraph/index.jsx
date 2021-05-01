@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const LeadParagraph = styled.p`
   margin-top: 24px;
@@ -14,6 +14,6 @@ export const LeadParagraph = styled.p`
   @media screen and (max-width: 480px) {
     font-size: 1rem;
   }
-`
+`;
 
 export default LeadParagraph;

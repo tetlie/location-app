@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Container = styled.div`
   background-color: #f2f2f2;
@@ -14,7 +14,6 @@ const Container = styled.div`
   @media screen and (max-width: 768px) {
     overflow-y: auto;
   }
-  
 `;
 
 export default Container;

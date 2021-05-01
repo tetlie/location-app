@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const SkeletonTitle = styled.div`
   background: #ddd;
@@ -15,6 +15,6 @@ export const SkeletonTitle = styled.div`
   @media screen and (max-width: 480px) {
     height: 2.5rem;
   }
-`
+`;
 
 export default SkeletonTitle;

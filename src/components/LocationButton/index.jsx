@@ -1,5 +1,25 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+
+function LocationButton({
+  title,
+  url,
+  handleHoverPosition,
+  handleClickPosition,
+  long,
+  lat,
+  location,
+}) {
+  return (
+    <LocationLinkBase
+      href={url}
+      onMouseEnter={() => location === true && handleHoverPosition(long, lat)}
+      onClick={() => location === true && handleClickPosition(long, lat)}
+    >
+      <LinkTitle>{title}</LinkTitle>
+    </LocationLinkBase>
+  );
+}
 
 export const LocationLinkBase = styled.a`
   padding: 0.5em;
@@ -31,30 +51,5 @@ export const LinkTitle = styled.span`
     font-size: 0.75rem;
   }
 `;
-
-function LocationButton({
-  title, 
-  url, 
-  handleHoverPosition, 
-  handleClickPosition, 
-  long, 
-  lat,
-  location
-}) {
- 
-  return (
-      <LocationLinkBase
-        href={url}
-        onMouseEnter={() => 
-          (location === true) && handleHoverPosition(long, lat)
-        }
-        onClick={() => 
-          (location === true) && handleClickPosition(long, lat)
-        }
-      >
-        <LinkTitle>{title}</LinkTitle>
-      </LocationLinkBase>
-  );
-}
 
 export default LocationButton;

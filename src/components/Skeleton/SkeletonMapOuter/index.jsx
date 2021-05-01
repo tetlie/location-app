@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const SkeletonMapOuter = styled.div`
   background-color: #f2f2f2;

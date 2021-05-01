@@ -1,5 +1,4 @@
-import styled from 'styled-components'
-
+import styled from "styled-components";
 
 const SkeletonLocationLinkItem = styled.div`
   min-width: 100px;

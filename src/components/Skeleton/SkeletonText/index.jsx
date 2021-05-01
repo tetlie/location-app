@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const SkeletonText = styled.div`
   background: #ddd;
@@ -15,6 +15,6 @@ export const SkeletonText = styled.div`
   @media screen and (max-width: 480px) {
     height: 0.75rem;
   }
-`
+`;
 
 export default SkeletonText;

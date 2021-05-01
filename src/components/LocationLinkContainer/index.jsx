@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const LocationLinkContainer = styled.div`
   grid-area: locations;
@@ -17,4 +17,3 @@ const LocationLinkContainer = styled.div`
 `;
 
 export default LocationLinkContainer;
-

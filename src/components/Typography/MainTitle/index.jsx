@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const MainTitle = styled.h1`
   font-size: 4rem;
